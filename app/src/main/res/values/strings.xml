@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">word-stock</string>
+    <string name="word_hint">Enter word here</string>
+    <string name="word_label">Word</string>
+    <string name="translate_hint">Enter translate here or pull it</string>
+    <string name="translate_label">Translate</string>
+    <string name="word_favorite_label">Favorite</string>
+    <string name="get_translate">Get translate</string>
+    <string name="get_definition">Get definition</string>
 </resources>

@@ -15,7 +15,8 @@
         android:id="@+id/word"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/word_hint" />
+        android:hint="@string/word_hint"
+        android:inputType="" />
 
     <TextView
         style="?android:listSeparatorTextViewStyle"
@@ -26,17 +27,35 @@
     <EditText
         android:id="@+id/translate"
         android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="@string/translate_hint"
+        android:inputType="" />
+
+    <TextView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/translate_hint"/>
+        android:text="@string/definition_label"
+        style="?android:listSeparatorTextViewStyle"/>
+
+    <EditText
+        android:id="@+id/definition"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:hint="@string/definition_hint"
+        android:inputType="" />
 
     <Button
         android:id="@+id/get_translate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorPrimary"
+        android:padding="6dp"
         android:text="@string/get_translate"
         android:textColor="@color/buttonLabel" />
+
     <Button
-        android:id="@+id/button_get_definition"
+        android:id="@+id/get_definition"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -46,8 +65,8 @@
         android:textColor="@color/buttonLabel" />
 
     <CheckBox
-        android:id="@+id/crime_solved"
+        android:id="@+id/favorite"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/word_favorite_label" />
+        android:text="@string/favorite_label" />
 </LinearLayout>

@@ -1,6 +1,7 @@
 package com.ilyaiparshin.word_stock;
 
 import android.os.Bundle;
+import android.print.PrinterId;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -8,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +45,7 @@ public class WordListFragment extends Fragment{
         private Word mWord;
         private TextView mWordTextView;
         private TextView mTranslateTextView;
+        private ImageView mFavoriteImageView;
 
         public WordHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_word, parent, false));
@@ -51,12 +54,14 @@ public class WordListFragment extends Fragment{
 
             mWordTextView = (TextView) itemView.findViewById(R.id.word_title);
             mTranslateTextView = (TextView) itemView.findViewById(R.id.word_translate);
+            mFavoriteImageView = (ImageView) itemView.findViewById(R.id.word_favorite);
         }
 
         public void bind(Word word){
             mWord = word;
             mWordTextView.setText(mWord.getWord());
             mTranslateTextView.setText(mWord.getTranslate());
+            mFavoriteImageView.setVisibility(word.getFavorite() ? View.VISIBLE:View.GONE);
         }
 
         @Override

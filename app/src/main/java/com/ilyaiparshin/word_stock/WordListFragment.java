@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -36,9 +38,30 @@ public class WordListFragment extends Fragment{
         mWordRecycleView.setAdapter(mAdapter);
     }
 
-    private class WordHolder extends RecyclerView.ViewHolder{
+    private class WordHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+
+        private Word mWord;
+        private TextView mWordTextView;
+        private TextView mTranslateTextView;
+
         public WordHolder(LayoutInflater inflater, ViewGroup parent){
             super(inflater.inflate(R.layout.list_item_word, parent, false));
+
+            itemView.setOnClickListener(this);
+
+            mWordTextView = (TextView) itemView.findViewById(R.id.word_title);
+            mTranslateTextView = (TextView) itemView.findViewById(R.id.word_translate);
+        }
+
+        public void bind(Word word){
+            mWord = word;
+            mWordTextView.setText(mWord.getWord());
+            mTranslateTextView.setText(mWord.getTranslate());
+        }
+
+        @Override
+        public void onClick(View view){
+            Toast.makeText(getActivity(), mWord.getWord(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -57,8 +80,10 @@ public class WordListFragment extends Fragment{
 
         @Override
         public void onBindViewHolder(WordHolder holder, int position){
-
+            Word word = mWords.get(position);
+            holder.bind(word);
         }
+
         @Override
         public int getItemCount(){
             return mWords.size();

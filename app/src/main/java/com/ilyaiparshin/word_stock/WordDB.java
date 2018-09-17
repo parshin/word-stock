@@ -17,32 +17,24 @@ public class WordDB {
         }
         return sWordDB;
     }
+
     private WordDB(Context context){
         mWords = new ArrayList<>();
 
-        Word word = new Word();
-        word.setWord("one");
-        word.setFavorite(false);
-        mWords.add(word);
-
-        Word word2 = new Word();
-        word2.setWord("two");
-        word2.setFavorite(false);
-        mWords.add(word2);
-
-        Word word3 = new Word();
-        word3.setWord("three");
-        word3.setFavorite(false);
-        mWords.add(word3);
-
-        Word word4 = new Word();
-        word4.setWord("four");
-        word4.setFavorite(false);
-        mWords.add(word4);
+        for (int i = 0; i < 100; i++){
+            Word word = new Word();
+            word.setWord("Word"+Integer.toString(i));
+            word.setDfinition("Definition"+Integer.toString(i));
+            word.setTranslate("Translate"+Integer.toString(i));
+            word.setFavorite(i % 2 == 0);
+            mWords.add(word);
+        }
     }
+
     public List<Word> getWords(){
         return mWords;
     }
+
     public Word getWord(UUID id){
         for(Word word : mWords){
             if (word.getId().equals(id)){

@@ -1,5 +1,6 @@
 package com.ilyaiparshin.word_stock;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.print.PrinterId;
 import android.support.v4.app.Fragment;
@@ -32,12 +33,25 @@ public class WordListFragment extends Fragment{
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateUI();
+    }
+
     private void updateUI() {
         WordDB worddb = WordDB.get(getActivity());
         List<Word> words = worddb.getWords();
 
         mAdapter = new WordAdapter(words);
         mWordRecycleView.setAdapter(mAdapter);
+
+        if (mAdapter == null) {
+            mAdapter = new WordAdapter(words);
+            mWordRecycleView.setAdapter(mAdapter);
+        } else{
+            mAdapter.notifyDataSetChanged();
+        }
     }
 
     private class WordHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
@@ -66,7 +80,9 @@ public class WordListFragment extends Fragment{
 
         @Override
         public void onClick(View view){
-            Toast.makeText(getActivity(), mWord.getWord(), Toast.LENGTH_SHORT).show();
+
+            Intent intent = WordActivity.newIntent(getActivity(), mWord.getId());
+            startActivity(intent);
         }
     }
 

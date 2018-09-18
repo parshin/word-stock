@@ -13,15 +13,29 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import java.util.UUID;
+
 public class WordFragment extends Fragment {
+
+    private static final String ARG_WORD_ID = "word_id";
     private Word mWord;
     private EditText mWordEditText;
     private CheckBox mFavoriteCheckBox;
 
+    public static WordFragment newInstance(UUID wordId){
+        Bundle args = new Bundle();
+        args.putSerializable(ARG_WORD_ID, wordId);
+        WordFragment fragment = new WordFragment();
+        fragment.setArguments(args);
+
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        mWord = new Word();
+        UUID wordId = (UUID) getArguments().getSerializable(ARG_WORD_ID);
+        mWord = WordDB.get(getActivity()).getWord(wordId);
     }
 
 //    @Nullable
@@ -31,6 +45,7 @@ public class WordFragment extends Fragment {
         View word_view = inflater.inflate(R.layout.fragment_word, container, false);
 
         mWordEditText = (EditText) word_view.findViewById(R.id.word);
+        mWordEditText.setText(mWord.getWord());
         mWordEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -51,6 +66,7 @@ public class WordFragment extends Fragment {
         });
 
         mFavoriteCheckBox = (CheckBox) word_view.findViewById(R.id.favorite);
+        mFavoriteCheckBox.setChecked(mWord.getFavorite());
         mFavoriteCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {

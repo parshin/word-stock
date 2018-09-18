@@ -1,27 +1,28 @@
 package com.ilyaiparshin.word_stock;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import java.util.UUID;
+
 public class WordActivity extends SingleFragmentActivity {
 
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_fragment);
-//
-//        FragmentManager fm = getSupportFragmentManager();
-//        Fragment fragment = fm.findFragmentById(R.id.fragment_container);
-//
-//        if (fragment == null){
-//            fragment = new WordFragment();
-//            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
-//        }
-//    }
+    private static final String EXTRA_WORD_ID = "com.ilyaiparshin.android.word_stock.word_id";
+
+    public static Intent newIntent(Context context, UUID wordId){
+        Intent intent = new Intent(context, WordActivity.class);
+        intent.putExtra(EXTRA_WORD_ID, wordId);
+        return  intent;
+    }
+
     @Override
     protected Fragment createFragment(){
-        return new WordFragment();
+
+        UUID wordId = (UUID) getIntent().getSerializableExtra(EXTRA_WORD_ID);
+        return WordFragment.newInstance(wordId);
     }
 }

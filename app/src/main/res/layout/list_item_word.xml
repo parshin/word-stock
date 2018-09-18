@@ -15,6 +15,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         android:text="Word Title"
+        android:textColor="@android:color/black"
+        android:textSize="18dp"
         app:layout_constraintEnd_toStartOf="@+id/word_favorite"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

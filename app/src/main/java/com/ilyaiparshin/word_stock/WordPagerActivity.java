@@ -37,6 +37,7 @@ public class WordPagerActivity extends AppCompatActivity{
 
         mViewPager = (ViewPager) findViewById(R.id.word_view_pager);
         mWords = WordDB.get(this).getWords();
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         mViewPager.setAdapter(new FragmentStatePagerAdapter(fragmentManager) {
 
@@ -52,6 +53,14 @@ public class WordPagerActivity extends AppCompatActivity{
                 return mWords.size();
             }
         });
+
+        for (int i = 0; i < mWords.size(); i++) {
+            if (mWords.get(i).getId().equals(crimeId)) {
+                mViewPager.setCurrentItem(i);
+                break;
+            }
+        }
+
 
     }
 }

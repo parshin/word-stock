@@ -81,7 +81,7 @@ public class WordListFragment extends Fragment{
         @Override
         public void onClick(View view){
 
-            Intent intent = WordActivity.newIntent(getActivity(), mWord.getId());
+            Intent intent = WordPagerActivity.newIntent(getActivity(), mWord.getId());
             startActivity(intent);
         }
     }
